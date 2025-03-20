@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThirdwebProvider } from "thirdweb/react";
 import "./globals.css";
-
+import { client } from "./client";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
+import ConnectButtonWrapper from "@/components/ConnectButtonWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +34,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThirdwebProvider>{children}</ThirdwebProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange>
+          <ThirdwebProvider>
+            <nav className="">
+              <div className="container mx-auto flex items-center justify-between">
+                
+                <ThemeToggle />
+                <ConnectButtonWrapper />
+              </div>
+            </nav>
+            {children}
+          </ThirdwebProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
