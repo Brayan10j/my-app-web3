@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThirdwebProvider } from "thirdweb/react";
 import "./globals.css";
-import { client } from "./client";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -38,15 +36,25 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="light"
           enableSystem
-          disableTransitionOnChange>
+          disableTransitionOnChange
+        >
           <ThirdwebProvider>
-            <nav className="">
-              <div className="container mx-auto flex items-center justify-between">
-                
-                <ThemeToggle />
-                <ConnectButtonWrapper />
+            <header className="border-b sticky top-0 z-50 bg-white/95 dark:bg-gray-950/95 backdrop-blur-sm">
+              <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+                <div className="flex items-center gap-2">
+                  <Link href="/" className="flex items-center gap-2">
+                    <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                      CryptoPAY
+                    </span>
+                  </Link>
+                </div>
+                <nav className="hidden md:flex gap-6"></nav>
+                <div className="flex items-center gap-2 md:gap-4">
+                  <ThemeToggle />
+                  <ConnectButtonWrapper />
+                </div>
               </div>
-            </nav>
+            </header>
             {children}
           </ThirdwebProvider>
         </ThemeProvider>
